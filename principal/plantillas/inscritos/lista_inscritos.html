@@ -16,7 +16,12 @@
                 <th>Nombre</th>
                 <th>Correo</th>
                 <th>Teléfono</th>
-                <th>Institucion asociada</th>
+                <th>N° Personas</th>
+                <th>Fecha Inscripción</th>
+                <th>Hora</th>
+                <th>Estado</th>
+                <th>Institución</th>
+                <th>Observación</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -26,13 +31,12 @@
                 <td>{{ inscrito.nombre }}</td>
                 <td>{{ inscrito.correo }}</td>
                 <td>{{ inscrito.telefono }}</td>
-                <td>
-                    {% if inscrito.institucion_asociada %}
-                        {{ inscrito.institucion_asociada.nombre_institucion }}
-                    {% else %}
-                        Sin institucion
-                    {% endif %}
-                </td>
+                <td>{{ inscrito.nro_personas }}</td>
+                <td>{{ inscrito.fecha_inscripcion|date:"d/m/Y" }}</td>
+                <td>{{ inscrito.hora_inscripcion|time:"H:i" }}</td>
+                <td>{{ inscrito.get_estado_display }}</td>
+                <td>{{ inscrito.institucion_asociada.nombre_institucion|default:"Sin institución" }}</td>
+                <td>{{ inscrito.observacion|default:"-" }}</td>
                 <td>
                     <a href="{% url 'editar_inscrito' inscrito.pk %}" class="btn btn-warning btn-sm">Editar</a>
                     <a href="{% url 'eliminar_inscrito' inscrito.pk %}" class="btn btn-danger btn-sm">Eliminar</a>

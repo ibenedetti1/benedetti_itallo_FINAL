@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializadores import InscritoSerializer, InstitucionSerializer
 from .modelos import Institucion 
+from rest_framework.decorators import api_view
 
 def pagina_inicio(request):
     return render(request, 'inicio.html')
@@ -81,38 +82,6 @@ class InscritoAPIDetalle(APIView):
         inscrito.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-class InstitucionAPIListadoCrear(APIView):
-    def get(self, request):
-        instituciones = Institucion.objects.all()
-        serializer = InstitucionSerializer(instituciones, many=True)
-        return Response(serializer.data)
-
-    def post(self, request):
-        serializer = InstitucionSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-class InstitucionAPIDetalle(APIView):
-    def get(self, request, pk):
-        institucion = get_object_or_404(Institucion, pk=pk)
-        serializer = InstitucionSerializer(institucion)
-        return Response(serializer.data)
-
-    def put(self, request, pk):
-        institucion = get_object_or_404(Institucion, pk=pk)
-        serializer = InstitucionSerializer(institucion, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, pk):
-        institucion = get_object_or_404(Institucion, pk=pk)
-        institucion.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
 def lista_instituciones(request):
     instituciones = Institucion.objects.all()
     return render(request, 'instituciones/lista_instituciones.html', {'instituciones': instituciones})
@@ -144,5 +113,33 @@ def eliminar_institucion(request, pk):
         institucion.delete()
         return redirect('lista_instituciones')
     return render(request, 'instituciones/confirmar_eliminacion_institucion.html', {'institucion': institucion})
+
+@api_view(['GET'])
+def autor_api(request):
+    autor_data = {
+        "nombre": "Itallo Benedetti",
+        "proyecto": "Seminario de Fisiología del ejercicio",
+        "fecha": "2024",
+        "universidad": "INACAP"
+    }
+    return Response(autor_data)
+
+@api_view(['GET'])
+def lista_instituciones_api(request):
+    instituciones = Institucion.objects.all()
+    serializer = InstitucionSerializer(instituciones, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def detalle_institucion_api(request, pk):
+    try:
+        institucion = Institucion.objects.get(pk=pk)
+    except Institucion.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = InstitucionSerializer(institucion)
+    return Response(serializer.data)
+
+def api_vista_autor(request):
+    return render(request, 'api_autor.html')
 
 

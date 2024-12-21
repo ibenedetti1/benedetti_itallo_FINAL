@@ -16,9 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from principal.vistas import (
+    autor_api, 
+    lista_instituciones_api, 
+    detalle_institucion_api,
+    InscritoAPIListadoCrear,
+    InscritoAPIDetalle
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('principal.urls')), 
+    path('api/autor/', autor_api, name='api_autor'),
+    path('api/instituciones/', lista_instituciones_api, name='api_lista_instituciones'),
+    path('api/instituciones/<int:pk>/', detalle_institucion_api, name='api_detalle_institucion'),
 ]
 
