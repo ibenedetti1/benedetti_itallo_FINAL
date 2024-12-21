@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>API Instituciones</h1>
+        <div>
+            <a href="{% url 'pagina_inicio' %}" class="btn btn-secondary">Volver</a>
+        </div>
+    </div>
+
+    <p>Explora y utiliza la información de instituciones asociadas al seminario.</p>
+
+    <div class="border rounded" style="overflow: hidden;">
+        <iframe src="{% url 'api_lista_instituciones' %}" width="100%" height="600px" style="border: none;"></iframe>
+    </div>
+</div>
+{% endblock %}

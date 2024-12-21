@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <h1 class="text-danger">¿Confirma eliminación de Inscripción?</h1>
+    <p class="text-muted">Nombre: {{ inscrito.nombre }}</p>
+    <p class="text-muted">Correo: {{ inscrito.correo }}</p>
+    <p class="text-muted">Teléfono: {{ inscrito.telefono }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a href="{% url 'lista_inscritos' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

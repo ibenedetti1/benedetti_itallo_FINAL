@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<div class="container mt-5 text-center">
+    <h1 class="mb-4 fw-bold">Seminario de Fisiología del ejercicio</h1>
+    <p class="mb-5 text-secondary">Gestiona los inscritos y accede a la información del seminario</p>
+
+    <div class="row g-4 justify-content-center">
+        <div class="col-md-3">
+            <div class="card shadow-sm h-100 border-0">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="bi bi-person-lines-fill display-4 text-primary"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">Lista de participantes</h5>
+                    <p class="card-text text-secondary">Consulta la lista de personas inscritas en el seminario y sus detalles.</p>
+                    <a href="{% url 'lista_inscritos' %}" class="btn btn-primary">Ver participantes</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow-sm h-100 border-0">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="bi bi-building display-4 text-warning"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">Lista de Instituciones</h5>
+                    <p class="card-text text-secondary">Gestiona las instituciones asociadas al seminario.</p>
+                    <a href="{% url 'lista_instituciones' %}" class="btn btn-warning">Ver instituciones</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow-sm h-100 border-0">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="bi bi-person-fill-gear display-4 text-success"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">API Participantes</h5>
+                    <p class="card-text text-secondary">Accede a los datos de los inscritos para análisis o integración en otras plataformas.</p>
+                    <a href="{% url 'api_vista_inscritos' %}" class="btn btn-success">Acceder a API</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow-sm h-100 border-0">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="bi bi-building-fill-gear display-4 text-warning"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">API Instituciones</h5>
+                    <p class="card-text text-secondary">Explora y utiliza la información de instituciones asociadas al seminario.</p>
+                    <a href="{% url 'api_vista_instituciones' %}" class="btn btn-warning text-white">Acceder a API</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

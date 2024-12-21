@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <h2>Nueva Inscripción</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.institucion_asociada.label_tag }}
+            {{ form.institucion_asociada }}
+        </div>
+        <div class="mb-3">
+            {{ form.nombre.label_tag }}
+            {{ form.nombre }}
+        </div>
+        <div class="mb-3">
+            {{ form.correo.label_tag }}
+            {{ form.correo }}
+        </div>
+        <div class="mb-3">
+            {{ form.telefono.label_tag }}
+            {{ form.telefono }}
+        </div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="{% url 'lista_inscritos' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
